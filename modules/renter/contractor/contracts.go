@@ -7,7 +7,6 @@ package contractor
 import (
 	"errors"
 	"math/big"
-	"time"
 
 	"github.com/NebulousLabs/Sia/build"
 	"github.com/NebulousLabs/Sia/modules"
@@ -525,7 +524,7 @@ func (c *Contractor) threadedContractMaintenance() {
 			return
 		case <-c.interruptMaintenance:
 			return
-		case <-time.After(contractFormationInterval):
+		default:
 		}
 	}
 
@@ -605,7 +604,7 @@ func (c *Contractor) threadedContractMaintenance() {
 			return
 		case <-c.interruptMaintenance:
 			return
-		case <-time.After(contractFormationInterval):
+		default:
 		}
 	}
 }
