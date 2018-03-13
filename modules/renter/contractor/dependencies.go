@@ -53,6 +53,7 @@ type (
 		Host(types.SiaPublicKey) (modules.HostDBEntry, bool)
 		IncrementSuccessfulInteractions(key types.SiaPublicKey)
 		IncrementFailedInteractions(key types.SiaPublicKey)
+		PendingScans() int
 		RandomHosts(n int, exclude []types.SiaPublicKey) []modules.HostDBEntry
 		ScoreBreakdown(modules.HostDBEntry) modules.HostScoreBreakdown
 	}

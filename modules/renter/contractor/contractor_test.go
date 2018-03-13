@@ -37,6 +37,7 @@ func (newStub) ActiveHosts() []modules.HostDBEntry                              
 func (newStub) Host(types.SiaPublicKey) (settings modules.HostDBEntry, ok bool) { return }
 func (newStub) IncrementSuccessfulInteractions(key types.SiaPublicKey)          { return }
 func (newStub) IncrementFailedInteractions(key types.SiaPublicKey)              { return }
+func (newStub) PendingScans() int                                               { return 0 }
 func (newStub) RandomHosts(int, []types.SiaPublicKey) []modules.HostDBEntry     { return nil }
 func (newStub) ScoreBreakdown(modules.HostDBEntry) modules.HostScoreBreakdown {
 	return modules.HostScoreBreakdown{}
@@ -137,6 +138,7 @@ func (stubHostDB) ActiveHosts() (hs []modules.HostDBEntry)                      
 func (stubHostDB) Host(types.SiaPublicKey) (h modules.HostDBEntry, ok bool)         { return }
 func (stubHostDB) IncrementSuccessfulInteractions(key types.SiaPublicKey)           { return }
 func (stubHostDB) IncrementFailedInteractions(key types.SiaPublicKey)               { return }
+func (stubHostDB) PendingScans() int                                                { return 0 }
 func (stubHostDB) PublicKey() (spk types.SiaPublicKey)                              { return }
 func (stubHostDB) RandomHosts(int, []types.SiaPublicKey) (hs []modules.HostDBEntry) { return }
 func (stubHostDB) ScoreBreakdown(modules.HostDBEntry) modules.HostScoreBreakdown {

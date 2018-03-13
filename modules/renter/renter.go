@@ -72,6 +72,10 @@ type hostDB interface {
 	// Host returns the HostDBEntry for a given host.
 	Host(types.SiaPublicKey) (modules.HostDBEntry, bool)
 
+	// PendingScans returns the number of hosts that are currently queued for
+	// scanning.
+	PendingScans() int
+
 	// RandomHosts returns a set of random hosts, weighted by their estimated
 	// usefulness / attractiveness to the renter. RandomHosts will not return
 	// any offline or inactive hosts.

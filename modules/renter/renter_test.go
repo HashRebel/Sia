@@ -203,6 +203,7 @@ type pricesStub struct {
 	dbEntries []modules.HostDBEntry
 }
 
+func (pricesStub) PendingScans() int { return 0 }
 func (ps pricesStub) RandomHosts(n int, exclude []types.SiaPublicKey) []modules.HostDBEntry {
 	return ps.dbEntries
 }

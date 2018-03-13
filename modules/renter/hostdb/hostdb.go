@@ -222,6 +222,14 @@ func (hdb *HostDB) Host(spk types.SiaPublicKey) (modules.HostDBEntry, bool) {
 	return host, exists
 }
 
+// PendingScans returns the number of hosts that are currently queued for
+// scanning.
+func (hdb *HostDB) PendingScans() int {
+	hdb.mu.RLock()
+	defer hdb.mu.RUnlock()
+	return len(hdb.scanList)
+}
+
 // RandomHosts implements the HostDB interface's RandomHosts() method. It takes
 // a number of hosts to return, and a slice of netaddresses to ignore, and
 // returns a slice of entries.

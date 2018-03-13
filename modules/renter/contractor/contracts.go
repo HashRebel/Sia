@@ -552,6 +552,15 @@ func (c *Contractor) threadedContractMaintenance() {
 		return
 	}
 
+	pendingScans := c.hdb.PendingScans()
+	if pendingScans > 0 {
+		// If we don't know a significant portion of the network and there is a
+		// large scan going on, we wait for that scan to finish.
+		c.log.Printf("WARNING: Waiting for %v hosts to be scanned before forming contracts",
+			pendingScans)
+		return
+	}
+
 	// Assemble an exclusion list that includes all of the hosts that we already
 	// have contracts with, then select a new batch of hosts to attempt contract
 	// formation with.
