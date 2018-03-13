@@ -287,7 +287,14 @@ func (r *Renter) SetSettings(s modules.RenterSettings) error {
 	if s.DownloadSpeed < 0 || s.UploadSpeed < 0 {
 		return errors.New("download/upload rate limit can't be below 0")
 	}
-	r.hostContractor.SetRateLimits(s.DownloadSpeed, s.UploadSpeed, s.PacketSize)
+	// TODO: In the future we might want the user to be able to configure the
+	// packetSize using the API. For now the sane default is modules.SectorSize
+	// if the user wants to limit the connection.
+	if s.DownloadSpeed == 0 && s.UploadSpeed == 0 {
+		r.hostContractor.SetRateLimits(s.DownloadSpeed, s.UploadSpeed, 0)
+	} else {
+		r.hostContractor.SetRateLimits(s.DownloadSpeed, s.UploadSpeed, 4096)
+	}
 
 	r.managedUpdateWorkerPool()
 	return nil
